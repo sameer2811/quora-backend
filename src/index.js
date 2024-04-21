@@ -1,5 +1,18 @@
-const { serverConfig } = require('./config');
-const {userRouter} = require('./routes');
+const {
+    serverConfig,
+    dbConfig
+} = require('./config');
+
+const {
+    userRouter
+} = require('./routes');
+
+const {
+    errorHandler
+} = require('./util')
+
+const bodyParser = require('body-parser');
+
 
 // Importing the required express
 const express = require('express');
@@ -7,10 +20,12 @@ const express = require('express');
 // Initialization of the server
 const server = express();
 
-// Basic Log just to check the config 
-console.log("Printing the server config ", serverConfig.PORT);
-
-
+// declaring of usage of body- parser json
+server.use(bodyParser.json());
+server.use(bodyParser.text());
+server.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // Setup of API Routes
 server.get("/", function (req, res) {
@@ -21,9 +36,14 @@ server.get("/", function (req, res) {
     })
 });
 
-server.use("/users" , userRouter);
+server.use("/users", userRouter);
+
+server.use(errorHandler);
 
 // Listen Method for the server
-server.listen(serverConfig.PORT, function () {
+server.listen(serverConfig.PORT, async function () {
     console.log("Server started Listeneing at ", serverConfig);
+    await dbConfig.connectToDataBase();
+    console.log("You have been connected to database successfully");
 });
+
