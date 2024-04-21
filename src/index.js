@@ -46,4 +46,3 @@ server.listen(serverConfig.PORT, async function () {
     await dbConfig.connectToDataBase();
     console.log("You have been connected to database successfully");
 });
-

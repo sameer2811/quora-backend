@@ -16,18 +16,20 @@ class UserService {
 
     async fetchUserProfile(id) {
         try {
-
+            const data = await this.UserRepo.fetchUserProfile(id);
+            return data;
         } catch (error) {
-            console.log("Some error occured at userService.js ");
+            console.log("Some error occured at userService.js ", error);
             throw error;
         }
     }
 
-    async updateUserProfile(id) {
+    async updateUserProfile(updatedData, id) {
         try {
-
+            const data = await this.UserRepo.updateUserProfile(updatedData, id);
+            return data;
         } catch (error) {
-            console.log("Some error occured at userService.js ");
+            console.log("Some error occured at userService.js ", error);
             throw error;
         }
     }

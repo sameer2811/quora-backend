@@ -13,7 +13,7 @@ function errorHandler(err, req, res, next) {
         success: false,
             errName: "Invalid Request",
             errDescription: "Not able to find data particular due to this request",
-            details: {}
+            details: err
     });
 }
 

@@ -1,3 +1,3 @@
 module.exports = {
-    userRouter : require('./userApi.js')
+    userRouter: require('./userApi.js')
 }

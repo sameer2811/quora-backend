@@ -8,9 +8,9 @@ const schema = new mongoose.Schema({
         type: String,
         require: true
     },
-    userId : {
-        type : String,
-        require : true
+    userId: {
+        type: String,
+        require: true
     },
     bio: String,
     likes: Number,
