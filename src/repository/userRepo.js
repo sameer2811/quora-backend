@@ -1,5 +1,5 @@
 const {
-    UserSchema
+    UserProfileSchema
 } = require('./../models/');
 
 const {
@@ -15,7 +15,7 @@ class UserRespository {
     async createNewUserId(userName, email) {
         try {
             let userId = uuidv4();
-            let response = await UserSchema.create({
+            let response = await UserProfileSchema.create({
                 UserName: userName,
                 email: email,
                 userId: userId,
@@ -30,7 +30,7 @@ class UserRespository {
 
     async fetchUserProfile(id) {
         try {
-            let response = await UserSchema.find({
+            let response = await UserProfileSchema.find({
                 userId: id
             })
             return response;
@@ -43,7 +43,7 @@ class UserRespository {
     async updateUserProfile(updatedUserData, id) {
         console.log("Printing the updated user Data", updatedUserData, id);
         try {
-            let response = await UserSchema.findOneAndUpdate({
+            let response = await UserProfileSchema.findOneAndUpdate({
                 userId: id
             }, {
                 $set: updatedUserData

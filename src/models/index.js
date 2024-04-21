@@ -1,5 +1,7 @@
+
 module.exports = {
-    UserSchema: require('./userSchema'),
+    UserProfileSchema: require('./userSchema'),
     QuestionSchema: require('./questionSchema'),
-    AnswerSchema: require('./answerSchema')
+    AnswerSchema: require('./answerSchema'),
+    CommentsSchema: require('./commentsSchema')
 }

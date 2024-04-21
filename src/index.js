@@ -6,7 +6,8 @@ const {
 const {
     userRouter,
     questionRouter,
-    answerRouter
+    answerRouter,
+    commentRouter
 } = require('./routes');
 
 const {
@@ -40,7 +41,8 @@ server.get("/", function (req, res) {
 
 server.use("/users", userRouter);
 server.use("/questions", questionRouter);
-server.use("/answers", answerRouter)
+server.use("/answers", answerRouter);
+server.use("/comments", commentRouter);
 server.use(errorHandler);
 
 // Listen Method for the server
