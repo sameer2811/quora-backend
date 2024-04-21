@@ -1,3 +1,7 @@
+const answerRouter = require('./answerApi');
+
 module.exports = {
-    userRouter: require('./userApi.js')
+    userRouter: require('./userApi'),
+    questionRouter: require('./questionApi'),
+    answerRouter: require('./answerApi')
 }

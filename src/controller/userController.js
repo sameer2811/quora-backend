@@ -13,7 +13,9 @@ const NotFoundError = require('./../error/notFound.error');
 const userService = new UserService(new UserRepository());
 async function createNewUserId(req, res, next) {
     try {
-        //TODO: Do Some validation of data coming here
+        if (!(req.body.hasOwnProperty("username") && req.body.hasOwnProperty("email"))) {
+            throw new BadRequest("Required arguments Not passed", "check whether all the described two arguments are passed with the same name or not --> username , email");
+        }
         const userName = req.body.username;
         const userEmail = req.body.email;
         const result = await userService.createNewUserId(userName, userEmail);
@@ -23,7 +25,6 @@ async function createNewUserId(req, res, next) {
             "message": "Your profile is now created"
         })
     } catch (error) {
-        //TODO: define your error middleWare in the end
         next(error);
     }
 }

@@ -22,7 +22,7 @@ class UserRespository {
             });
             return response;
         } catch (error) {
-            console.log("Some error occured at userRepo.js ");
+            console.log("Some error occured at userRepo.js ",error);
             throw error;
         }
 
@@ -35,7 +35,7 @@ class UserRespository {
             })
             return response;
         } catch (error) {
-            console.log("Some error occured at userService.js ");
+            console.log("Some error occured at userService.js ",error);
             throw error;
         }
     }
@@ -52,7 +52,7 @@ class UserRespository {
             });
             return response;
         } catch (error) {
-            console.log("Some error occured at userService.js ");
+            console.log("Some error occured at userService.js ",error);
             throw error;
         }
     }
