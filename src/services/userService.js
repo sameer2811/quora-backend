@@ -9,7 +9,7 @@ class UserService {
             const data = await this.UserRepo.createNewUserId(userName, userEmail);
             return data;
         } catch (error) {
-            console.log("Some error occured at userService.js ");
+            console.log("Some error occured at userService.js ", error);
             throw error;
         }
     }

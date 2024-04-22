@@ -12,18 +12,18 @@ const {
 const commentService = new CommentService(new CommentsRepository());
 async function commentOnComment(req, res, next) {
     try {
+        if (!(req.body.hasOwnProperty("userId") && req.body.hasOwnProperty("text"))) {
+            throw new BadRequest("Required arguments Not passed", "check whether all the described two arguments are passed with the exact same name or not --> userId , text");
+        }
         let userId = req.body.userId;
         let text = req.body.text;
         let answerId = req.params.id;
 
         const response = await commentService.commentOnComment(answerId, userId, text);
-        if (response == null || response == undefined || response == []) {
-            return new BadRequest("Something-Went-Wrong", "Can you please check you are commenting on the correct answer and have some description on it and authenticated as well");
-        }
         return res.status(StatusCodes.CREATED).json({
             sucess: true,
             response: response,
-            msgDetails: "SuccessFully commented on commented!!!"
+            msgDetails: "SuccessFully commented on comment!!!"
         });
     } catch (error) {
         next(error);
@@ -32,6 +32,9 @@ async function commentOnComment(req, res, next) {
 
 async function commentOnAnswer(req, res, next) {
     try {
+        if (!(req.body.hasOwnProperty("userId") && req.body.hasOwnProperty("text"))) {
+            throw new BadRequest("Required arguments Not passed", "check whether all the described two arguments are passed with the exact same name or not --> userId , text");
+        }
         let userId = req.body.userId;
         let text = req.body.text;
         let answerId = req.params.id;

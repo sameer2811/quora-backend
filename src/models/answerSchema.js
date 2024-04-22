@@ -13,9 +13,9 @@ const Schema = mongoose.Schema({
         type: String,
         required: [true, "Please provide the question id of the Question you are trying to answer to"]
     },
-    userId : {
-        type : String,
-        required: [true , "Please provide the User id!"]
+    userId: {
+        type: String,
+        required: [true, "Please provide the User id!"]
     },
     likeUsersId: {
         type: [String]

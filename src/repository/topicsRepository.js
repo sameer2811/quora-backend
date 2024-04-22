@@ -7,10 +7,10 @@ class TopicsRepositoty {
         try {
             const response = await TopicSchema.create({
                 topic: text
-            })
+            });
             return response;
         } catch (error) {
-            console.log("issue in topicsRepo.js  ")
+            console.log("issue in topicsRepo.js  ", error);
             throw error;
         }
     }
@@ -20,7 +20,7 @@ class TopicsRepositoty {
             const response = await TopicSchema.find({});
             return response;
         } catch (error) {
-            console.log("issue in topicsRepo.js  ")
+            console.log("issue in topicsRepo.js  ", error);
             throw error;
         }
     }

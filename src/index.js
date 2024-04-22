@@ -33,7 +33,6 @@ server.use(bodyParser.urlencoded({
 
 // Setup of API Routes
 server.get("/", function (req, res) {
-    console.log("Server has recieved your request at / url");
     return res.json({
         "sucess": true,
         "msg": "server listening at / route"

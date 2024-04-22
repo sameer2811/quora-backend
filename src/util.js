@@ -1,4 +1,5 @@
 const BaseError = require('./error/BaseError');
+
 function errorHandler(err, req, res, next) {
     if (err instanceof BaseError) {
         return res.status(err.statusCode).json({
@@ -11,9 +12,9 @@ function errorHandler(err, req, res, next) {
 
     return res.status(404).json({
         success: false,
-            errName: "Invalid Request",
-            errDescription: "Not able to find data particular due to certain issue",
-            details: err
+        errName: "Invalid Request",
+        errDescription: "Not able to find data particular due to certain issue",
+        details: err
     });
 }
 

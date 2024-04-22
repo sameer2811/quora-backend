@@ -15,7 +15,7 @@ const userService = new UserService(new UserRepository());
 async function createNewUserId(req, res, next) {
     try {
         if (!(req.body.hasOwnProperty("username") && req.body.hasOwnProperty("email"))) {
-            throw new BadRequest("Required arguments Not passed", "check whether all the described two arguments are passed with the same name or not --> username , email");
+            throw new BadRequest("Required arguments Not passed", "check whether all the described two arguments are passed with the exact same name or not --> username , email");
         }
         const userName = req.body.username;
         const userEmail = req.body.email;
@@ -52,7 +52,7 @@ async function getUserDetails(req, res, next) {
     try {
         let id = req.params.id;
         const result = await userService.fetchUserProfile(id);
-        if (result == null || result == undefined || result.length == 0) {
+        if (result == null || result == undefined || result.length <= 0) {
             throw new BadRequest("No user found ", "Check whether the id that you are providing is valid or not!!!");
         }
         return res.status(StatusCodes.OK).json({

@@ -7,15 +7,17 @@ const {
 const {
     StatusCodes
 } = require('http-status-codes');
+const BadRequest = require('./../error/badRequest.error');
 
 const answerService = new AnswerService(new AnswerRepository());
 async function answerToQuestion(req, res, next) {
     try {
+        if (!(req.body.hasOwnProperty("userId") && req.body.hasOwnProperty("text"))) {
+            throw new BadRequest("Required arguments Not passed", "check whether all the described two arguments are passed with the exact same name or not --> userId , text");
+        }
         const questionId = req.params.id;
         const userId = req.body.userId;
         const answerText = req.body.text;
-        console.log(a);
-        console.log(" Printing the answerToQuestion of the id ", questionId, userId, answerText);
         const response = await answerService.postAnswerToQuestion(userId, questionId, answerText);
         return res.status(StatusCodes.CREATED).json({
             sucess: true,
@@ -30,6 +32,9 @@ async function answerToQuestion(req, res, next) {
 
 async function updateAnswerToQuestion(req, res, next) {
     try {
+        if (!req.body.hasOwnProperty("text")) {
+            throw new BadRequest("Required arguments Not passed", "check whether all the described  arguments text is passed with the exact same name or not ---> text");
+        }
         const answerId = req.params.id;
         const updatedAnswerText = req.body.text;
         console.log(" Printing the updateAnswer to Question of the id ", answerId, updatedAnswerText);

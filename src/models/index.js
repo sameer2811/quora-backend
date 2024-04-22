@@ -1,4 +1,3 @@
-
 module.exports = {
     UserProfileSchema: require('./userSchema'),
     QuestionSchema: require('./questionSchema'),

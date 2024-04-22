@@ -10,5 +10,5 @@ questionRouter.get('/search', QuestionController.getQuestionsDataController);
 
 questionRouter.post('/', QuestionController.postNewQuestionController);
 
-questionRouter.get('/:id/answers', AnswerController.answerToQuestion);
+questionRouter.post('/:id/answers', AnswerController.answerToQuestion);
 module.exports = questionRouter;

@@ -14,7 +14,7 @@ async function postNewQuestionController(req, res, next) {
     try {
         let questionRequiredData = req.body;
         if (!(questionRequiredData.hasOwnProperty("userId") && questionRequiredData.hasOwnProperty("title") && questionRequiredData.hasOwnProperty("body"))) {
-            throw new BadRequest("Required arguments Not passed", "check whether all the described three arguments are passed with the same name or not --> userId,title,body");
+            throw new BadRequest("Required arguments Not passed", "check whether all the described three arguments are passed with the exact same name or not --> userId , title , body");
         }
 
         const response = await questionService.postNewQuestion(questionRequiredData);
