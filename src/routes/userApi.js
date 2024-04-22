@@ -17,4 +17,6 @@ userRouter.post('/', UserController.createNewUserId);
 
 userRouter.put('/:id', UserController.updateUser);
 
+userRouter.post('/:userId/follow/:targetId', UserController.performFollowAction);
+
 module.exports = userRouter;

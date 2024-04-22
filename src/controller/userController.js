@@ -65,8 +65,24 @@ async function getUserDetails(req, res, next) {
     }
 }
 
+async function performFollowAction(req, res, next) {
+    try {
+        let userId = req.params.userId;
+        let secondId = req.params.targetId;
+        const response = await userService.performFollowAction(userId , secondId);
+        return res.status(StatusCodes.CREATED).json({
+            success : true,
+            "messgeId " : "You have started following the specificed user"
+        })
+    } catch (error) {
+        console.log("Certain error has occured in the perform Follow Action of the User Controller ", error);
+        next(error);
+    }
+}
+
 module.exports = {
     createNewUserId,
     updateUser,
-    getUserDetails
+    getUserDetails,
+    performFollowAction
 }

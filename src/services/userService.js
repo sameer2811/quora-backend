@@ -33,7 +33,16 @@ class UserService {
             throw error;
         }
     }
-}
 
+    async performFollowAction(userId, targetId) {
+        try {
+            const data = await this.UserRepo.performFollowAction(userId, targetId);
+            return data;
+        } catch (error) {
+            console.log("Certain error has occured in the perform Follow Action of the User Service ", error);
+            throw (error);
+        }
+    }
+}
 
 module.exports = UserService;
