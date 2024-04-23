@@ -67,10 +67,50 @@ class CommentsRepository {
             })
             return response;
         } catch (error) {
-            console.log("Some issue occured at the commentOnAnswer of  CommentsRepository.js " , error);
+            console.log("Some issue occured at the commentOnAnswer of  CommentsRepository.js ", error);
             throw error;
         }
     }
+
+    async likeAComment(userId, commentId) {
+        let userExists = await UserProfileSchema.find({
+            userId: userId
+        });
+
+        if (userExists == null || userExists == undefined || userExists.length <= 0) {
+            throw new BadRequest("Invalid User Id Passed ", "Please check whether the user id that you are trying to pass is even valid or not");
+        }
+
+        let commentIdExists = await CommentsSchema.find({
+            commentId: commentId
+        });
+
+        if (commentIdExists == null || commentIdExists == undefined || commentIdExists.length <= 0) {
+            throw new BadRequest("Invalid Answer Id Passed ", "Please check whether the comment id that you are trying to pass is even valid or not");
+        }
+
+        let res = await CommentsSchema.find({
+            commentId: commentId,
+            likeUsersId: {
+                $in: [userId]
+            }
+        });
+
+        console.log("response of the query is ", res);
+        if (res.length > 0) {
+            throw new BadRequest("Bad-Request", "You are already  liked this comment");
+        }
+
+        let likeResp = await CommentsSchema.updateOne({
+            commentId: commentId
+        }, {
+            $push: {
+                likeUsersId: userId
+            }
+        });
+        return likeResp;
+    }
+
 }
 
 module.exports = CommentsRepository;

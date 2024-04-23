@@ -51,8 +51,28 @@ async function updateAnswerToQuestion(req, res, next) {
     }
 }
 
+async function likeAnAnswer(req, res, next) {
+    try {
+        if (!req.body.hasOwnProperty("userId")) {
+            throw new BadRequest("Required arguments Not passed", "check whether all the described  arguments are passed with the exact same name or not --> userId");
+        }
+        const answerId = req.params.id;
+        const userId = req.body.userId;
+        const response = await answerService.likeAnAnswer(userId, answerId);
+        return res.status(StatusCodes.CREATED).json({
+            sucess: true,
+            response: response,
+            msgDetails: "Your like has been Succesfully created in answer"
+        });
+    } catch (error) {
+        console.log("Some error has occured at the answerToQuestion of answerController.js", error);
+        next(error);
+    }
+}
+
 
 module.exports = {
     answerToQuestion,
-    updateAnswerToQuestion
+    updateAnswerToQuestion,
+    likeAnAnswer
 }

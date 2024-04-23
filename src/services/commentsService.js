@@ -20,6 +20,15 @@ class CommentService {
             throw error;
         }
     }
+
+    async likeAComment(userId, commentId) {
+        try {
+            const data = await this.commentRepo.likeAComment(userId, commentId);
+            return data;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = CommentService;

@@ -67,6 +67,45 @@ class AnswerRepository {
             throw error;
         }
     }
+
+    async likeAnAnswer(userId, answerId) {
+        let userExists = await UserProfileSchema.find({
+            userId: userId
+        });
+
+        if (userExists == null || userExists == undefined || userExists.length <= 0) {
+            throw new BadRequest("Invalid User Id Passed ", "Please check whether the user id that you are trying to pass is even valid or not");
+        }
+
+        let answerIdExists = await AnswerSchema.find({
+            answerId: answerId
+        });
+
+        if (answerIdExists == null || answerIdExists == undefined || answerIdExists.length <= 0) {
+            throw new BadRequest("Invalid Answer Id Passed ", "Please check whether the answer id that you are trying to pass is even valid or not");
+        }
+
+        let res = await AnswerSchema.find({
+            answerId: answerId,
+            likeUsersId: {
+                $in: [userId]
+            }
+        });
+
+        console.log("response of the query is ", res);
+        if (res.length > 0) {
+            throw new BadRequest("Bad-Request", "You are already  liked this answer");
+        }
+
+        let likeResp = await AnswerSchema.updateOne({
+            answerId: answerId
+        }, {
+            $push: {
+                likeUsersId: userId
+            }
+        });
+        return likeResp;
+    }
 }
 
 module.exports = AnswerRepository;

@@ -10,4 +10,6 @@ answerRouter.put('/:id', AnswerController.updateAnswerToQuestion);
 
 answerRouter.post('/:id/comments', CommentController.commentOnAnswer)
 
+answerRouter.post('/:id/likes', AnswerController.likeAnAnswer);
+
 module.exports = answerRouter;

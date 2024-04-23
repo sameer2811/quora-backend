@@ -53,7 +53,26 @@ async function commentOnAnswer(req, res, next) {
     }
 }
 
+async function likeAComment(req, res, next) {
+    try {
+        if (!req.body.hasOwnProperty("userId")) {
+            throw new BadRequest("Required arguments Not passed", "check whether all the described  arguments are passed with the exact same name or not --> userId");
+        }
+        const commentId = req.params.id;
+        const userId = req.body.userId;
+        const response = await commentService.likeAComment(userId, commentId);
+        return res.status(StatusCodes.CREATED).json({
+            sucess: true,
+            response: response,
+            msgDetails: "Your like has been Succesfully created in comments"
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     commentOnAnswer,
-    commentOnComment
+    commentOnComment,
+    likeAComment
 }

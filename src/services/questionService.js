@@ -22,6 +22,15 @@ class QuestionService {
             throw error
         }
     }
+
+    async likeAQuestion(userId, questionId) {
+        try {
+            const data = await this.questionRepo.likeAQuestion(userId, questionId);
+            return data;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 

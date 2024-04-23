@@ -22,6 +22,16 @@ class AnswerService {
             throw error;
         }
     }
+
+    async likeAnAnswer(userId, answerId) {
+        try {
+            const data = await this.answerRepo.likeAnAnswer(userId, answerId);
+            return data;
+        } catch (error) {
+            console.log("Certain error has occured at the likeAnAnswer answerController.js ", error);
+            throw error;
+        }
+    }
 }
 
 module.exports = AnswerService;

@@ -11,4 +11,7 @@ questionRouter.get('/search', QuestionController.getQuestionsDataController);
 questionRouter.post('/', QuestionController.postNewQuestionController);
 
 questionRouter.post('/:id/answers', AnswerController.answerToQuestion);
+
+questionRouter.post('/:id/likes', QuestionController.likeAQuestion);
+
 module.exports = questionRouter;

@@ -44,8 +44,27 @@ async function getQuestionsDataController(req, res, next) {
     }
 }
 
+async function likeAQuestion(req, res, next) {
+    try {
+        if (!req.body.hasOwnProperty("userId")) {
+            throw new BadRequest("Required arguments Not passed", "check whether all the described  arguments are passed with the exact same name or not --> userId");
+        }
+        const questionId = req.params.id;
+        const userId = req.body.userId;
+        const response = await questionService.likeAQuestion(userId, questionId);
+        return res.status(StatusCodes.CREATED).json({
+            sucess: true,
+            response: response,
+            msgDetails: "Your like has been Succesfully created in Question"
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
 
 module.exports = {
     postNewQuestionController,
-    getQuestionsDataController
+    getQuestionsDataController,
+    likeAQuestion
 }

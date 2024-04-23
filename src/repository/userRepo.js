@@ -88,6 +88,7 @@ class UserRespository {
             }
 
             let res = await UserProfileSchema.find({
+                userId : userId,
                 following: {
                     $in: [targetId]
                 }
